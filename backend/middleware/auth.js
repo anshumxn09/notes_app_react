@@ -2,6 +2,7 @@ const jsonwebtoken = require('jsonwebtoken');
 
 exports.isAuthenticated = async (req, res, next) => {
     try {
+
         const {token} = req.cookies;
         if(!token){
             return res.status(400).json({
@@ -11,10 +12,10 @@ exports.isAuthenticated = async (req, res, next) => {
         }
 
         const decodedData = await jsonwebtoken.verify(token, process.env.SECRET_KEY);
-
         req.user = decodedData;
-        next();
         
+        next();
+
     } catch (error) {
         return res.status(500).json({
             success : false,

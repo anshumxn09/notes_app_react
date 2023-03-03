@@ -10,4 +10,10 @@ userRoute.route("/me")
     .put(isAuthenticated, userController.updateProfile)
     .delete(isAuthenticated, userController.deleteProfile)
 
+userRoute.route("/get/blogs").get(isAuthenticated, userController.getBlogs)
+userRoute.route("/password/update").put(isAuthenticated, userController.updatePassword)
+userRoute.route("/blog/edit/:id")
+    .put(isAuthenticated, userController.updateBlog)
+    .delete(isAuthenticated, userController.deleteBlog)
+
 module.exports = userRoute;
