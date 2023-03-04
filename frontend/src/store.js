@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { userReducer } from "./Reducers/UserReducer";
+import { getAllBlogs } from "./Reducers/BlogReducer";
+import { userReducer , updateReducer} from "./Reducers/UserReducer";
 
 const store = configureStore({
     reducer : {
-        userReducer
+        userReducer, updateReducer, getAllBlogs
     }
 })
 

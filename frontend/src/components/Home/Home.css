@@ -1,0 +1,58 @@
+.homePage{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.leftSide{
+    width: 30%;
+    height: 100vh;
+    overflow: auto;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px 2px;
+    border-right: 2px solid blue;
+    position: relative;
+}
+
+.logout{
+    position: absolute;
+    padding: 2px 5%;
+    width: 100%;
+    bottom: 10px;
+}
+
+.profileAvatar{
+    max-width: 90%;
+    height: auto;
+    max-height: 60%;
+    border-radius: 50%;
+}
+
+.profileAvatar> img{
+    border-radius: 50%;
+    border : 1px solid blue;
+}
+
+.spaceBetween{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 2px 5%;
+    flex-wrap: wrap;
+}
+
+.leftSide > a{
+    color: #1890ff;
+    text-decoration: none;
+    margin: 10px 0;
+}
+
+.rightSide{
+    width: 70%;
+    padding: 20px 5px;
+}

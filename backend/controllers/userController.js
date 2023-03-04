@@ -1,6 +1,7 @@
 const userSchema = require("../schema/userSchema");
 const emailValidator = require('email-validator');
 const blogSchema = require("../schema/blogSchema");
+const cloudinary = require('cloudinary');
 
 const userController = {
     register : async (req, res) => {
@@ -18,12 +19,13 @@ const userController = {
                 })
             }
 
-            if(!firstName || !lastName || !email || !avatar || !password){
+            if(!firstName || !lastName || !email || !password){
                 return res.status(400).json({
                     success : false,
                     message : "some fields are missing"
                 })
             }
+
 
             if(!emailValidator.validate(email)){
                 return res.status(400).json({
@@ -31,9 +33,20 @@ const userController = {
                     message : "invalid email"
                 })
             }
-            
+            let image_upload = {
+                public_id : "image.public_id",
+                url : "https://res.cloudinary.com/anshumxn09/image/upload/v1677756698/Post/vciuulx48ce4zfkcvvqm.jpg"
+            }
+            if(avatar){
+                const image = await cloudinary.v2.uploader.upload(avatar, {
+                    folder : "Blog"
+                })
+                image_upload.public_id = image.public_id;
+                image_upload.url = image.secure_url;
+            } 
+
             const user = new userSchema({
-                firstName, lastName, email, avatar, password
+                firstName, lastName, email, avatar : image_upload, password
             })
 
             await user.save();
@@ -132,12 +145,20 @@ const userController = {
         try {
             const {firstName, lastName, avatar} = req.body;
 
-            const user = await userSchema.findByIdAndUpdate({
-                _id : req.user._id,
-            }, {
-                firstName, lastName, avatar
-            })
+            const user = await userSchema.findById(req.user._id);
 
+            if(avatar){
+                const image = await cloudinary.v2.uploader.upload(avatar, {
+                    folder : "Blog"
+                })
+                await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+                user.avatar.public_id = image.public_id;
+                user.avatar.url = image.secure_url;
+            }
+
+            user.firstName = firstName;
+            user.lastName = lastName;
+            
             await user.save();
             return res.status(200).json({
                 success : true,
