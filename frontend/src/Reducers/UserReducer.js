@@ -82,6 +82,35 @@ export const userReducer = createReducer({}, {
 })
 
 export const updateReducer = createReducer({}, {
+
+    updateBlogReq : (state) => {
+        state.loading = true;
+    },
+    updateBlogSuccess : (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+        state.error = null;
+    },
+    updateBlogFailure : (state,action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.message = null;
+    },
+
+    deleteBlogReq : (state) => {
+        state.loading = true;
+    },
+    deleteBlogSuccess : (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+        state.error = null;
+    },
+    deleteBlogFailure : (state,action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.message = null;
+    },
+
     updatePassRequest : (state) => {
         state.loading = true;
     },

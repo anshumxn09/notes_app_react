@@ -23,7 +23,7 @@ const Login = () => {
   return (
     <Row className='h-100' justify={"center"} align={"middle"}>
         <Col lg={{span : 8}} md={{span : 10}} sm={{span : 12}} xs={{span : 20}}>
-            <Card>
+            <Card style={{border : "2px solid #1890ff"}}>
                 <Form layout='vertical' onFinish={loginHandler}>
                     <Typography.Title level={2} className='text-center' >LOGIN</Typography.Title>
                     <Form.Item label="Email" name="email" rules={[

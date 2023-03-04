@@ -1,4 +1,4 @@
-import { Button, Input, Select, Typography, Modal, Form } from 'antd';
+import { Button, Input, Select, Typography, Modal, Form, Row, Divider, Col, Drawer} from 'antd';
 import React, { useEffect , useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProfile, loadUser, logout, updatePassword } from '../../Actions/User';
@@ -7,15 +7,21 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getAllBlog } from '../../Actions/Blogs';
 import UpdateProfile from '../UpdateProfile/UpdateProfile';
-import {DeleteOutlined} from '@ant-design/icons';
+import {DeleteOutlined, MenuOutlined} from '@ant-design/icons';
+import CreateBlogButton from '../Create Blog/CreateBlogButton';
+import BoxCard from '../Card/BoxCard';
+import Profile from '../Profile/Profile';
+import NoNotes from '../No Notes/NoNotes';
 
 const Home = () => {
     const dispatch = useDispatch();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [updateModal, setUpdateModal] = useState(false);
-
+    const [open, setOpen] = useState(false);
+ 
     const {user} = useSelector(state => state.userReducer);
     const {error: passError, message : passMessage, loading : passLoading} = useSelector(state => state.updateReducer);
+    const {blog} = useSelector(state => state.getAllBlogs);
 
     const handleSignout = () => {
         if(window.confirm("Are you sure to signout?")){
@@ -50,6 +56,14 @@ const Home = () => {
         setUpdateModal(false);
     };
 
+    const showDrawer = () => {
+        setOpen(true);
+    };
+      
+    const onClose = () => {
+        setOpen(false);
+    };
+
     useEffect(() => {
         dispatch(loadUser());
         dispatch(getAllBlog());
@@ -70,11 +84,12 @@ const Home = () => {
     }, [dispatch, passError, passMessage, toast])
   return user && (
     <div className='h-100 homePage'>
-        <div className="leftSide">
+        <CreateBlogButton />   
+        <div className="leftSide hidden">
             <div className="profileAvatar">
                 <img src={user.avatar.url} alt=""  width={"100%"} height={"100%"}/>
             </div>
-            <div className="spaceBetween">
+            <div className="spaceBetween" style={{marginTop : "5px"}}>
                 <Typography.Text type='secondary'>Name: </Typography.Text>
                 <Typography.Text  type='secondary'>{user.firstName} {user.lastName}</Typography.Text>
             </div>
@@ -122,8 +137,17 @@ const Home = () => {
             <Button type='primary' onClick={handleSignout} block>Signout</Button>
             </div>
         </div>
+        <Drawer title="My Profile" placement="left" onClose={onClose} open={open}>
+        <Profile/>
+      </Drawer>
         <div className="rightSide">
-            <Input placeholder='Search your blogs here...' allowClear></Input>
+            <div className="mobile">
+                <Button onClick={showDrawer} icon={<MenuOutlined />}/>
+            </div>
+            {
+                blog && blog.length === 0 ? <NoNotes/> : (
+                    <>
+                    <Input size='large' placeholder='Search your notes here...' allowClear></Input>
             <div className="sortBlock" style={{ textAlign : "right" }}>
                 <Select 
                     style={{
@@ -139,6 +163,24 @@ const Home = () => {
                     ]}
                 ></Select>
             </div>
+            <Divider>Notes</Divider>
+            <Row gutter={[12, 5]} justify="space-evenly" align={"center"}>
+              { blog && blog.length > 0 && blog.map((elem) => {
+                return (
+                    <Col>
+                    <BoxCard 
+                        key={elem._id}
+                        id={elem._id}
+                        title={elem.title}  
+                        description={elem.description}
+                        ></BoxCard>
+                    </Col>
+                )
+              }) }
+            </Row>
+                    </>
+                )
+            }
         </div>
     </div>
   )

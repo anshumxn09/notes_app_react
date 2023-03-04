@@ -19,7 +19,7 @@ const blogController = {
             await blog.save();
             return res.status(200).json({
                 success : true,
-                message : "blog created successfully"
+                message : "Note created successfully"
             }) 
 
         } catch (error) {

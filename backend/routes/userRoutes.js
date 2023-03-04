@@ -12,8 +12,9 @@ userRoute.route("/me")
 
 userRoute.route("/get/blogs").get(isAuthenticated, userController.getBlogs)
 userRoute.route("/password/update").put(isAuthenticated, userController.updatePassword)
-userRoute.route("/blog/edit/:id")
+userRoute.route("/blog/:id")
     .put(isAuthenticated, userController.updateBlog)
     .delete(isAuthenticated, userController.deleteBlog)
+    .get(isAuthenticated, userController.getSingleBlogs)
 
 module.exports = userRoute;

@@ -38,7 +38,7 @@ const Register = () => {
   return (
     <Row className='h-100' justify="center" align="middle">
         <Col lg={{span : 8}} md={{span : 10}} sm={{span : 12}} xs={{span : 20}}>
-            <Card>
+            <Card style={{border : "2px solid #1890ff"}}>
             <Form layout='vertical' onFinish={handleRegister}>
 
                 <div className="flexCenter">

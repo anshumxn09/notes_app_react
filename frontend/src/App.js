@@ -9,6 +9,10 @@ import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import Register from './components/Register/Register';
 import UpdateProfile from './components/UpdateProfile/UpdateProfile';
+import CreateBlog from './components/Create Blog/CreateBlog';
+import EditBlog from './components/Edit Blog/EditBlog';
+import NotFound from './components/Not Found/NotFound';
+
 const App = () => {
 
   const {isAuthenticated} = useSelector(state => state.userReducer);
@@ -38,6 +42,15 @@ const App = () => {
           <Register/>
         }></Route>
 
+        <Route path='/create/note' element={ isAuthenticated ? <CreateBlog/> :
+          <Login/>
+        }></Route>
+
+        <Route path='/edit/:id' element={ isAuthenticated ? <EditBlog/> :
+          <Login/>
+        }></Route>
+
+        <Route path='/*' element={<NotFound/>}></Route>
       </Routes>
     </Router>
   )

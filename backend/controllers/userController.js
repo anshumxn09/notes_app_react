@@ -257,7 +257,7 @@ const userController = {
             if(!blog){
                 return res.status(400).json({
                     success : false,
-                    message : "blog doesn't exists"
+                    message : "note doesn't exists"
                 })
             }
 
@@ -274,7 +274,7 @@ const userController = {
             await blog.save();
             return res.status(200).json({
                 success : true,
-                message : "blog updated successfully"
+                message : "note updated successfully"
             })
         } catch (error) {
             return res.status(500).json({
@@ -290,9 +290,31 @@ const userController = {
 
             return res.status(200).json({
                 success : true,
-                message : "successfully deleted blog"
+                message : "successfully deleted a note"
             })
 
+        } catch (error) {
+            return res.status(500).json({
+                success : false,
+                message : error.message
+            })
+        }
+    },
+    getSingleBlogs : async (req, res) => {
+        try {
+            const blog = await blogSchema.findById(req.params.id);
+
+            if(!blog){
+                return res.status(400).json({
+                    success : false,
+                    message : "Note with this id doesn't exists"
+                })  
+            }
+
+            return res.status(200).json({
+                success : true,
+                blog
+            })
         } catch (error) {
             return res.status(500).json({
                 success : false,
