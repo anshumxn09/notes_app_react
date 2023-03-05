@@ -24,7 +24,7 @@ const App = () => {
 
   return (
     <Router>
-      <ToastContainer autoClose={2000} theme="dark" />
+      <ToastContainer autoClose={2000} theme="light" />
       <Routes>
         <Route path='/' element={ isAuthenticated ? <Home/> :
           <Login/>

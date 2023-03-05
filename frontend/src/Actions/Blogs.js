@@ -1,10 +1,11 @@
 import axios from "axios";
 
-export const getAllBlog = () => async (dispatch) => {
+export const getAllBlog = (search="", sort="Default") => async (dispatch) => {
     try {
         dispatch({type : "getMyBlogReq"});
 
-        const {data} = await axios.get("/api/get/blogs");
+        console.log(sort);
+        const {data} = await axios.get(`/api/get/blogs?search=${search}&sort=${sort}`);
 
         dispatch({type : "getMyBlogSuccess", payload : data.blogs})
     } catch (error) {

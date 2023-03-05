@@ -25,17 +25,21 @@
 }
 
 .profileAvatar{
-    min-width: 90%;
-    max-width: 90%;
-    height: auto;
-    min-height: 60%;
-    max-height: 60%;
-    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+}
+
+@media screen and (max-width : 705px) {
+    .profileAvatar{
+        width: 110px;
+        height: 110px;
+    }
 }
 
 .profileAvatar> img{
     border-radius: 50%;
     border : 1px solid #1890ff;
+    object-fit: cover;
 }
 
 .spaceBetween{

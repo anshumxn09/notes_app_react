@@ -24,6 +24,7 @@ const Profile = () => {
             dispatch(logout());
         }
     }
+    
     const handlePasswordUpdate = (values) => {
         const {oldpass, newpass} = values;
         dispatch(updatePassword(oldpass, newpass));

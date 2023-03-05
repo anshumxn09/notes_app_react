@@ -233,9 +233,28 @@ const userController = {
     },
     getBlogs : async (req, res) => {
         try {
-            const blogs = await blogSchema.find({
+            let query = {
                 owner  : req.user._id,
-            })
+            }
+
+            let sortQuery = {
+                dateCreated : -1
+            }
+
+            const {search, sort} = req.query;
+            if(search){
+                query.title = {
+                    $regex : search,
+                    $options : "i"
+                }
+            }
+
+            if(sort !== "Default"){
+                delete sortQuery.dateCreated;
+                sortQuery.title = sort === "a-z" ? 1 : -1;
+            }
+
+            const blogs = await blogSchema.find(query).sort(sortQuery);
 
             return res.status(200).json({
                 success : true,

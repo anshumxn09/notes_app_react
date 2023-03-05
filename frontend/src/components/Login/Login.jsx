@@ -22,10 +22,20 @@ const Login = () => {
     }, [error])
   return (
     <Row className='h-100' justify={"center"} align={"middle"}>
+        <div className="footer" style={{
+            position : "absolute",
+            bottom : "5px",
+            textTransform : "uppercase",
+            letterSpacing : "2px"
+        }}>
+            <Typography.Text type='secondary' className='text-center'>&copy; Anshuman Sharma 2023</Typography.Text>
+        </div>
         <Col lg={{span : 8}} md={{span : 10}} sm={{span : 12}} xs={{span : 20}}>
             <Card style={{border : "2px solid #1890ff"}}>
                 <Form layout='vertical' onFinish={loginHandler}>
-                    <Typography.Title level={2} className='text-center' >LOGIN</Typography.Title>
+                    <div className='text-center'>
+                    <img src="https://res.cloudinary.com/anshumxn09/image/upload/v1678011919/Post/logoNotes_i9a8rm.png" alt="LOGO" width={80} height={80}/>
+                    </div>
                     <Form.Item label="Email" name="email" rules={[
                         {required : true,
                         message : "Kindly enter your email"}
