@@ -8,6 +8,7 @@ const blogRouter = require('./routes/blogRoutes');
 const userRoute = require('./routes/userRoutes');
 const cloudinary = require('cloudinary');
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 cloudinary.config({
     cloud_name : process.env.CLOUD_NAME,
@@ -23,7 +24,7 @@ app.use("/api", blogRouter);
 const startMyApp = async () => {
     try {
         await getDatabaseConnection();
-        app.listen(process.env.PORT, () => {
+        app.listen(PORT, () => {
             console.log("successfully running");
         })
     } catch (error) {

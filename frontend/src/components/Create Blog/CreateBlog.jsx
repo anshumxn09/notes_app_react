@@ -8,7 +8,7 @@ import { createBlog, getAllBlog } from '../../Actions/Blogs';
 const CreateBlog = () => {
     const dispatch = useDispatch();
     const navigator = useNavigate();
-    const {error : blogError, message : blogMessage} = useSelector(state => state.createBlog);
+    const {error : blogError, message : blogMessage, loading} = useSelector(state => state.createBlog);
 
     const handleCreate = async (values) => {
         const {title , description} = values;
@@ -47,7 +47,7 @@ const CreateBlog = () => {
                        <Input.TextArea style={{resize : "none", height : "200px"}}></Input.TextArea>
                     </Form.Item>
 
-                    <Button block type='primary'  className='mt-10' htmlType='submit'>CREATE</Button>
+                    <Button block type='primary' disabled={loading} className='mt-10' htmlType='submit'>CREATE</Button>
 
                     <div className='mt-10' style={{textAlign : "right"}}>
                         <Typography.Text>

@@ -7,12 +7,12 @@ export const userReducer = createReducer({}, {
         state.loading = true;
     },
     registerSuccess : (state, actions) => {
-        state.loading = true;
+        state.loading = false;
         state.user = actions.payload;
         state.isAuthenticated = true;
     },
     registerFailure : (state, action) => {
-        state.loading = true;
+        state.loading = false;
         state.error = action.payload;
         state.user = null
         state.isAuthenticated = false;
@@ -22,12 +22,12 @@ export const userReducer = createReducer({}, {
         state.loading = true;
     },
     loginSuccess : (state, actions) => {
-        state.loading = true;
+        state.loading = false;
         state.user = actions.payload;
         state.isAuthenticated = true;
     },
     loginFailure : (state, action) => {
-        state.loading = true;
+        state.loading = false;
         state.error = action.payload;
         state.user = null
         state.isAuthenticated = false;
@@ -37,13 +37,13 @@ export const userReducer = createReducer({}, {
         state.loading = true;
     },
     logoutSuccess : (state, actions) => {
-        state.loading = true;
+        state.loading = false;
         state.user = null;
         state.error = actions.payload
         state.isAuthenticated = false;
     },
     logoutFailure : (state, action) => {
-        state.loading = true;
+        state.loading = false;
         state.error = action.payload;
         state.user = null
         state.isAuthenticated = false;
@@ -53,7 +53,7 @@ export const userReducer = createReducer({}, {
         state.loading = true;
     },
     deleteUserSuccess : (state, actions) => {
-        state.loading = true;
+        state.loading = false;
         state.user = null;
         state.isAuthenticated = false;
         state.error = actions.payload;
@@ -66,7 +66,7 @@ export const userReducer = createReducer({}, {
         state.loading = true;
     },
     loadUserSuccess : (state, actions) => {
-        state.loading = true;
+        state.loading = false;
         state.user = actions.payload;
         state.isAuthenticated = true;
     },

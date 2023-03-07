@@ -4,8 +4,6 @@ export const getAllBlog = (search="", sort="Default", page=1) => async (dispatch
     try {
         dispatch({type : "getMyBlogReq"});
         const {data} = await axios.get(`/api/get/blogs?search=${search}&sort=${sort}&page=${page}`);
-
-        console.log(data.blogs);
         dispatch({type : "getMyBlogSuccess", payload : data})
     } catch (error) {
         dispatch({type : "getMyBlogFailure", payload : error.response.data.message})

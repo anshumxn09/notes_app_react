@@ -8,7 +8,7 @@ import { register } from '../../Actions/User';
 const Register = () => {
     const [image, setImage] = useState("");
     const dispatch = useDispatch();
-    const {error} = useSelector(state => state.userReducer);
+    const {error, loading} = useSelector(state => state.userReducer);
 
     const handleAvatar = (e) => {
         const file = e.target.files[0];
@@ -23,7 +23,6 @@ const Register = () => {
         reader.readAsDataURL(file);
     }
     const handleRegister = (values) => {
-        console.log(values);
         const {firstName, lastName, email, password } = values;
         dispatch(register(firstName, lastName, email, password , image))
     }
@@ -77,7 +76,7 @@ const Register = () => {
                     <input type="file" accept="image/*" onChange={handleAvatar}></input>
                 </div>
 
-                <Button htmlType='submit' type='primary' block>REGISTER</Button>
+                <Button htmlType='submit' disabled={loading} type='primary' block>REGISTER</Button>
 
                 <Typography.Paragraph style={{marginTop : "15px"}} className='text-center'>
                         <Typography.Text>Already have an account? </Typography.Text>

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const Login = () => {
     const dispatch = useDispatch();
-    const {error} = useSelector(state => state.userReducer);
+    const {error, loading} = useSelector(state => state.userReducer);
 
     const loginHandler = (values) => {
         const {email, password} = values;
@@ -50,7 +50,7 @@ const Login = () => {
                         <Input.Password placeholder='enter your password'></Input.Password>
                     </Form.Item>
 
-                    <Button style={{marginTop : "10px"}} block htmlType='submit' type='primary'>LOGIN</Button>
+                    <Button style={{marginTop : "10px"}} block htmlType='submit' disabled={loading} type='primary'>LOGIN</Button>
 
                     <Typography.Paragraph style={{marginTop : "15px"}} className='text-center'>
                         <Typography.Text>Don't have an account? </Typography.Text>
