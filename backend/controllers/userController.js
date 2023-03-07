@@ -233,15 +233,16 @@ const userController = {
     },
     getBlogs : async (req, res) => {
         try {
-            let query = {
-                owner  : req.user._id,
-            }
 
-            let sortQuery = {
-                dateCreated : -1
-            }
+            // Pagination
+            const page = req.query.page || 1;
+            const items_per_page = 3;
+            const skip = items_per_page * (page - 1);
 
+            let query = {owner  : req.user._id}
+            let sortQuery = {dateCreated : -1}
             const {search, sort} = req.query;
+
             if(search){
                 query.title = {
                     $regex : search,
@@ -254,12 +255,24 @@ const userController = {
                 sortQuery.title = sort === "a-z" ? 1 : -1;
             }
 
-            const blogs = await blogSchema.find(query).sort(sortQuery);
+            // count the number of blogs, to display the number of pages in the frontend side.
+
+            const blogsCount = await blogSchema.countDocuments(query).sort(sortQuery);
+
+            const blogs = await blogSchema.find(query)
+            .sort(sortQuery)
+            .limit(items_per_page)
+            .skip(skip);
+
+            const numberOfPages = Math.ceil(blogsCount/items_per_page);
 
             return res.status(200).json({
                 success : true,
-                blogs
+                blogs,
+                blogsCount,
+                numberOfPages
             })
+            
         } catch (error) {
             return res.status(500).json({
                 success : false,

@@ -9,6 +9,7 @@ import {
   Divider,
   Col,
   Drawer,
+  Pagination
 } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,7 +28,7 @@ import { DeleteOutlined, MenuOutlined, SearchOutlined } from "@ant-design/icons"
 import CreateBlogButton from "../Create Blog/CreateBlogButton";
 import BoxCard from "../Card/BoxCard";
 import Profile from "../Profile/Profile";
-import NoNotes from "../No Notes/NoNotes";
+import Paginationn from "../Pagination/Paginationn";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -37,13 +38,14 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("Default");
 
-  const { user } = useSelector((state) => state.userReducer);
+  const { user} = useSelector((state) => state.userReducer);
+
   const {
     error: passError,
     message: passMessage,
     loading: passLoading,
   } = useSelector((state) => state.updateReducer);
-  const { blog } = useSelector((state) => state.getAllBlogs);
+  const { blog, numberOfPages} = useSelector((state) => state.getAllBlogs);
 
   const handleSignout = () => {
     if (window.confirm("Are you sure to signout?")) {
@@ -288,6 +290,9 @@ const Home = () => {
                 );
               }) : <Typography.Title level={3} style={{textTransform : "uppercase", color : "#1890ff", fontFamily : "Poppins", letterSpacing : "2px"}} >No Notes Available</Typography.Title>}
           </Row>
+          {
+            blog && blog.length > 0 && <Paginationn  search={search} sort={sort} numberOfPages={numberOfPages}/>
+          }
         </div>
       </div>
     )

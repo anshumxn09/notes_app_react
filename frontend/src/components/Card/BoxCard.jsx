@@ -31,7 +31,7 @@ const BoxCard = ({title="Anshuman", description="God's Grace", id}) => {
     },
   ];
   return (
-        <Card hoverable style={{width : "290px", height : "350px"}}>
+        <Card hoverable style={{width : "290px", height : "350px", border : "1px solid #1890ff"}}>
       <div className="actions">
       <Dropdown menu={{items, }} placement="bottom">
        <Button style={{border : "none"}}><MoreOutlined /></Button>

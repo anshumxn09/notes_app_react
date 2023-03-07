@@ -25,8 +25,15 @@
 }
 
 .profileAvatar{
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
+}
+
+@media screen and (max-width : 1030px) {
+    .profileAvatar{
+        width: 200px;
+        height: 200px;
+    }
 }
 
 @media screen and (max-width : 705px) {

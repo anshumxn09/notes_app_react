@@ -7,7 +7,8 @@ export const getAllBlogs = createReducer({}, {
     },
     getMyBlogSuccess : (state, action) => {
         state.loading = false;
-        state.blog = action.payload
+        state.blog = action.payload.blogs;
+        state.numberOfPages = action.payload.numberOfPages;
     },
     getMyBlogFailure : (state,action) => {
         state.loading = false;
@@ -22,7 +23,7 @@ export const getSingleBlog = createReducer({}, {
     },
     getBlogSuccess : (state, action) => {
         state.loading = false;
-        state.blog = action.payload
+        state.blog = action.payload;;
     },
     getBlogFailure : (state,action) => {
         state.loading = false;

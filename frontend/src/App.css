@@ -88,6 +88,13 @@ input[type="file"]::-webkit-file-upload-button {
   min-height: 200px;
 }
 
+.paginationBlock{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  margin-top: 15px;
+}
 /* Card Actions */
 
 .actions{
