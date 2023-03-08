@@ -1,7 +1,7 @@
 # aNotes App
 ## _Notes App in MERN_
 
-"aNotes" is a notes application where a user can create their important notes, manage their profile credentials (authenticate themselves in real time enviornment) and perform advance features like search, sort and pagination and obviously CRUD operation on notes.
+"aNotes" is a notes application where a user can create their important notes, manage their profile credentials (authenticate themselves in real time environment) and perform advance features like search, sort and pagination and obviously CRUD operation on notes.
 
 # Tech Stack
 > Frontend : React, Redux Toolkit(state management), Ant Design
